@@ -1,48 +1,62 @@
-"use strict";
 // Você deve implementar uma função chamada encryptThis(message) que criptografa uma mensagem de texto seguindo as regras especificadas abaixo:
-// - A mensagem é uma string contendo palavras separadas por espaços.
-// - Cada palavra na mensagem deve ser criptografada da seguinte maneira:
-//   - O primeiro caractere da palavra deve ser convertido para o seu código ASCII.
-//   - O segundo caractere da palavra deve ser trocado com o último caractere.
-//   - A função deve retornar a mensagem criptografada, mantendo a mesma estrutura de palavras separadas por espaços.
+// 1: A mensagem é uma string contendo palavras separadas por espaços.
+// 2: Cada palavra na mensagem deve ser criptografada da seguinte maneira:
+//   2.1: O primeiro caractere da palavra deve ser convertido para o seu código ASCII.
+//   2.2: O segundo caractere da palavra deve ser trocado com o último caractere.
+//   2.3: A função deve retornar a mensagem criptografada, mantendo a mesma estrutura de palavras separadas por espaços.
+
+"use strict";
+
 function encryptThis(message) {
-    // divide a mensagem por espaços
+    // Divide a mensagem por espaços
     const words = message.split(' ');
-    // função auxiliar para criptografar uma única palavra
+
+    // Função auxiliar para criptografar uma única palavra
     const encryptWord = (word) => {
+        // Caso a palavra seja vazia, retorna vazio
         if (word.length === 0)
             return '';
+
+        // Retorna o código ASCII da primeira letra da palavra
         const firstChar = word.charCodeAt(0).toString();
+        
+        // Monta a palavra criptografada
         const encryptedWord = [
             firstChar,
             word[word.length - 1],
             word.slice(2, -1),
             word[1],
         ].join('');
+
         return encryptedWord;
     };
-    // mapeia cada palavra, criptografa e junta as palavras novamente com os espaços
+
+    // Mapeia cada palavra, criptografa e junta as palavras novamente com os espaços
     const encryptedMessage = words.map(encryptWord).join(' ');
     return encryptedMessage;
 }
-// testes unitários
-const test1 = encryptThis("Hello");
-console.log(test1); // '72olle'
-console.log(test1 === '72olle');
-console.log('-----------------');
-const test2 = encryptThis("good");
-console.log(test2); // '103doo'
-console.log(test2 === '103doo');
-console.log('-----------------');
-const test3 = encryptThis("hello world");
-console.log(test3); // '104olle 119drlo'
-console.log(test3 === '104olle 119drlo');
-console.log('-----------------');
-const test4 = encryptThis("");
-console.log(test4); // ''
-console.log(test4 === '');
-console.log('-----------------');
-const test5 = encryptThis("a");
-console.log(test5); // '97a'
-console.log(test5 === '97a');
-console.log('-----------------');
+
+// Testes unitários
+function testEncryptThis() {
+    // Espera o resultado 72olle
+    const result1 = encryptThis("Hello");
+    console.assert(result1 === '72olle', `Erro no Teste 1. Resultado: ${result1}`);
+  
+    // Espera o resultado ser 103doo
+    const result2 = encryptThis("good");
+    console.assert(result2 === '103doo', `Erro no Teste 2. Resultado: ${result2}`);
+  
+    // Espera o resultado ser 104olle 119drlo
+    const result3 = encryptThis("hello world");
+    console.assert(result3 === '104olle 119drlo', `Erro no Teste 3. Resultado: ${result3}`);
+  
+    // String vazia deve retornar vazio
+    const result4 = encryptThis("");
+    console.assert(result4 === '', `Erro no Teste 4. Resultado: ${result4}`);
+  
+    // Espera o resultado ser 97a
+    const result5 = encryptThis("a");
+    console.assert(result5 === '97a', `Erro no Teste 5. Resultado: ${result5}`);
+}
+  
+testEncryptThis();

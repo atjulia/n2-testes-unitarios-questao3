@@ -18,4 +18,3 @@ Questões desenvolvidas para a n2 da matéria de **ANÁLISE, PROJETO E DESENVOLV
  4. `cd ../questao4`
  5. `node index.js` 
 Obs: Independente da questão, caso deseje realizar alguma alteração no código, deve ser feito no arquivo **`index.ts`**, após salvar o arquivo é necessário executar o comando **`tsc`** no terminal
-		
